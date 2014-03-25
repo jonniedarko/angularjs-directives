@@ -27,22 +27,17 @@ app.directive('helloUser', function () {
 
             scope.username = attr.username;
 
-            /*function setUsername (){
+            function setUsername (){
                 scope.index++;
                 if(scope.index > scope.users.length){
                     scope.index=0
                 }
                 scope.username = scope.users[scope.index];
-            }*/
-
+            }
 
             elem.bind('click', function () {
-
-
-
-
-               // scope.$apply(setUsername());
-
+                scope.$apply(setUsername());
+               setUsername();
                 if(elem.css('background-color') == 'rgba(0, 0, 0, 0)')
                 {
                    elem.css('background-color', 'rgb(255, 0, 0)');

@@ -92,12 +92,92 @@ But we wanted to say Hello to some one! easy....
 <hello-user username="John"></hello-user>
 <div hello-user username="John"></div>
 ```
-**Note:** if we needed to update any of the scope variables during our interaction with the directive we may need to use `scope.$apply`. This is used to ensure the bindings update correctly . We will cover this in a later tutorial but if you want to know more now check out Jim Hoskins post on [AngularJS and scope.$apply](http://jimhoskins.com/2012/12/17/angularjs-and-apply.html) for more detail on this.
+
 
 variables and attributes are great and all but....I know a little boring. Lets snazz this directive up. lets make it cycle throught a few color schemes on click.
 
+```js
+app.directive('helloUser', function () {
+    return {
+        restrict: 'EA',
+        replace: false,
+        template: '<h3>Hello {{username}} from a Directive</h3>',
+        link: function (scope, elem, attr){
+            
+            scope.username = attr.username;
+
+            elem.bind('click', function () {
+
+                if(elem.css('background-color') == 'rgba(0, 0, 0, 0)')
+                {
+                   elem.css('background-color', 'rgb(255, 0, 0)');
+                   elem.css('color', 'rgb(255, 255, 255, 0)');
+                } else {
+                    elem.css('background-color', 'rgba(0, 0, 0, 0)');
+                    elem.css('color', 'rgb(0, 0, 0)');
+                }
+            });
+        }
+    };
+});
+```
+
+`elem` here is a JQuery lite selector for the element of the directive, and we are using the jquery `bind()` method to bind the anyonoums function to the click action type. Inside we are just doing regular jquery css manipulation.
+
+But what if we want to change the name on each click. Easy, set up an array of users and an index for tracking selection. Inside the current click method increment the index used to set the scope's username using the array[index]. 
+
+```js
+app.directive('helloUser', function () {
+    return {
+        restrict: 'EA',
+        replace: false,
+        template: '<h3>Hello {{username}} from a Directive</h3>',
+        link: function (scope, elem, attr){
+            scope.index = 0;
+            scope.users = ["Colin", "Martin", "Greg", "Victor"];
+
+            scope.username = attr.username;
+
+            function setUsername (){
+                scope.index++;
+                if(scope.index > scope.users.length){
+                    scope.index=0
+                }
+                scope.username = scope.users[scope.index];
+            }
+
+            elem.bind('click', function () {
+               
+                setUsername();
+               
+                if(elem.css('background-color') == 'rgba(0, 0, 0, 0)')
+                {
+                   elem.css('background-color', 'rgb(255, 0, 0)');
+                   elem.css('color', 'rgb(255, 255, 255, 0)');
+                } else {
+                    elem.css('background-color', 'rgba(0, 0, 0, 0)');
+                    elem.css('color', 'rgb(0, 0, 0)');
+                }
+            });
+        }
+    };
+});
+```
+
+Easy Right? But wait it doesn't work. When I click the colors still change but no name change..... 
+
+[PlaceHolder for $apply info]
 
 
+Enter `scope.$apply()`
+
+wrap the setUsername() with the $apply() `scope.$apply(setUsername());`.
+
+BAM! now it works. 
+
+But theres still one Manager Issue that you may propably haven't noticed. Add a second `hello-user` element to your page. Now do you see? when you click one, the name on all other instances of the directive update too....but what if thats not what you want? What if you want them all to only work per instance.
+
+[Placeholder scope] 
 
 
 
