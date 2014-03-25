@@ -1,0 +1,26 @@
+<div class="header" hidden>
+  <ul class="nav nav-pills pull-right">
+    <li class="active"><a ng-href="#">Home</a></li>
+    <li><a ng-href="#">About</a></li>
+    <li><a ng-href="#">Contact</a></li>
+  </ul>
+  <h3 class="text-muted">directives</h3>
+</div>
+<!-- Step 1: Our first Directive -->
+<div hello-world>Some Random Text that will be replaced by our directive</div>
+<hr/>
+<!-- step 2: multiple restrict types -->
+<hello-again>Blah blah blah</hello-again>
+<div class="hello-again">more pointless text</div>
+<!--directive: hello-again -->
+<hr/>
+
+<!-- Step 3: using a Scope and attrubites -->
+<hello-user username="John"></hello-user>
+<div hello-user username="John"></div>
+
+
+
+<div class="footer" hidden>
+  <p>♥ from the Yeoman team</p>
+</div>
