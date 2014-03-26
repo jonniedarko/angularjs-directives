@@ -13,17 +13,28 @@
 <hello-again>Blah blah blah</hello-again>
 <div class="hello-again">more pointless text</div>
 <!--directive: hello-again -->
+<br />
 <hr/>
-
+<br />
 <!-- Step 3: using a Scope and attrubites -->
 <hello-user username="John">drm</hello-user>
 
 <div hello-user username="John">123</div>
 <div hello-user username="John">123</div>
+<br />
 
+<hr/>
+<br />
 
+<!-- step 4 scope: ‘isolate’ -->
+<div>
+  <input type="text" ng-model="num1parent" />
+  <input type="number" ng-model="num2parent" />
+  <input type="number" ng-model="num3parent" />
+  <p>Parent Scope @ {{num1parent}}, = {{num2parent}}, & = {{sqr(num3parent)}}</p>
+<div simply-isolated numone='{{num1parent}}' numtwo='num2parent' sq="sqr" ></div>
 
-
+</div>
 
 <div class="footer" hidden>
   <p>♥ from the Yeoman team</p>

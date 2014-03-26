@@ -20,6 +20,7 @@ app.directive('helloUser', function () {
     return {
         restrict: 'EA',
         replace: false,
+        scope: true,
         template: '<h3>Hello {{username}} from a Directive</h3>',
         link: function (scope, elem, attr){
             scope.index = 0;
@@ -28,16 +29,15 @@ app.directive('helloUser', function () {
             scope.username = attr.username;
 
             function setUsername (){
-                scope.index++;
-                if(scope.index > scope.users.length){
-                    scope.index=0
+                scope.$apply(scope.index++);
+                if(scope.index > scope.users.length-1){
+                    scope.$apply(scope.index=0);
                 }
-                scope.username = scope.users[scope.index];
+                scope.$apply(scope.username = scope.users[scope.index]);
             }
 
             elem.bind('click', function () {
-                scope.$apply(setUsername());
-               setUsername();
+                setUsername()
                 if(elem.css('background-color') == 'rgba(0, 0, 0, 0)')
                 {
                    elem.css('background-color', 'rgb(255, 0, 0)');
