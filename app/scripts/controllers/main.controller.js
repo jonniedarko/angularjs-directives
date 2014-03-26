@@ -3,7 +3,7 @@
 angular.module('directivesApp')
   .controller('MainCtrl', function ($scope) {
 
-    $scope.sqr = function(num){
+    $scope.square = function(num){
         return num*num;
     }
 

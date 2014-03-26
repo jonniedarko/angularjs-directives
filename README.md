@@ -237,7 +237,6 @@ An isolated scope also allows us to share data between other isolated scope and 
 So lets create our first isolated directive...
 
 ```js
-//our new directive
 app.directive('simplyIsolated', function () {
     return{
         restrict: 'EA',
@@ -246,13 +245,16 @@ app.directive('simplyIsolated', function () {
             attnum: '@numone'
             ,bindnum: '=numtwo'
             ,expressnum: '&sq'
-        },
-        link: function (scope, elem, attr){
-           scope.square = scope.expressnum();
+        }
+        ,link: function (scope, elem, attr){
+           //wraps the funtion in an anymous function to allow 
+           //to be called in an expression in our template
+           scope.expressnum = scope.expressnum();
+
         }
         ,template:'<div><p> using "@" = {{attnum+attnum}}</p>'+
                         '<p>using "=" {{bindnum+bindnum}}</p>'+
-                        '<p>using "&" {{square(bindnum)}}</p><br/><p>{{y}}</p>'+
+                        '<p>using "&" {{expressnum(bindnum)}}</p><br/><p>{{y}}</p>'+
                 '</div>'
 
     };
@@ -264,7 +266,7 @@ inside our controller :
 ```js
 app.controller('MainCtrl', function ($scope) {
     //simple function to return a square of any number
-    $scope.sqr = function(num){
+    $scope.square = function(num){
         return num*num;
     }
 
@@ -277,24 +279,25 @@ finally add a few more elements to our page
   <input type="number" ng-model="num2parent" />
   <input type="number" ng-model="num3parent" />
   <p>Parent Scope @ {{num1parent}}, = {{num2parent}}, & = {{sqr(num3parent)}}</p>
-<div simply-isolated numone='{{num1parent}}' numtwo='num2parent' sq="sqr" ></div>
+<div simply-isolated numone='{{num1parent}}' numtwo='num2parent' sq="square" ></div>
 
 </div>
 ```
 Enter `12` into our inputs and now our directive template shows the results:
+
  * the `@` results in `1212` because `12` in this case is treated as a String
  * the `=` results in `24` because `12` is a number and it is not converted/ treated as a string
  * the `&` results in `144` because it calls the function square from it's isolated scope which is assigned from the expressnum attribute which is bound to the attribute `sq` which is assigned the function `sqr`
 
- ...Wow that last one is a little bit of a mouthfull [Needs More Detail explaining the last bullet]
+ ...Wow that last one is a little bit of a mouthfull 
 
-
-[Placeholder scope]
 
 ####[Todo]
-(info at[http://www.sitepoint.com/practical-guide-angularjs-directives-part-two/][http://www.sitepoint.com/practical-guide-angularjs-directives-part-two/])
+(info in this [ditective tutorial][http://www.sitepoint.com/practical-guide-angularjs-directives-part-two/] )
  * Transclusion
- * Controller
+ 
+ * Controller 
+    * [Controller Vs Link function][ http://stackoverflow.com/questions/12546945/difference-between-the-controller-link-and-compile-functions-when-definin]
  * require
 
 

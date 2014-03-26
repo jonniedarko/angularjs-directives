@@ -10,11 +10,14 @@ app.directive('simplyIsolated', function () {
             ,expressnum: '&sq'
         }
         ,link: function (scope, elem, attr){
-           scope.isolateSq = scope.expressnum();
+           //wraps the funtion in an anymous function to allow 
+           //to be called in an expression in our template
+           scope.expressnum = scope.expressnum();
+
         }
         ,template:'<div><p> using "@" = {{attnum+attnum}}</p>'+
                         '<p>using "=" {{bindnum+bindnum}}</p>'+
-                        '<p>using "&" {{isolateSq(bindnum)}}</p><br/><p>{{y}}</p>'+
+                        '<p>using "&" {{expressnum(bindnum)}}</p><br/><p>{{y}}</p>'+
                 '</div>'
 
     };
