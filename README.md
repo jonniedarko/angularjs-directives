@@ -1,10 +1,23 @@
 Angular Directives
 ========================
+#### Prerequisite's
+
+ * [Create a basic MEAN stack app with Yeoman](todo)
+ * [Angularjs Basics](todo)
+
+####Overview
+ * What is a directive
+ * Creating our first basic Directive
+ * Multiple 'restrict' types
+ * Why So Static? Creating dynamic directives
+    * Giving a Directive a Scope and a link function
+    * A brief intro to scope.$apply()
+    * Directive scope in detail
 
 ###What is a Directive and why are they used?
-In Angularjs a Directive is a marker on the DOM element that tells Angularjs's HTML compiler  to attach specific behaviour to that DOM element or transform teh element and its children.They are used to make custom reusable HTML elements while making DOM manipulation easier.
+In Angularjs, a Directive is a *marker* on the DOM element that tells Angularjs's HTML compiler to attach specific behavior to that DOM element or to transform the element and its children.They are used to make custom reusable HTML elements while making DOM manipulation easier.
 
-Some built in Directives of Angularjs include `ngBind`, `ngModel`, `ngView`. When Angular bootstraps your application the HTML compiler traverses the DOm matching directives against the DOM Elements
+Some built in Directives of Angularjs include [ngBind](http://docs.angularjs.org/api/ng/directive/ngBind), [ngModel](http://docs.angularjs.org/api/ng/directive/ngModel), & [ngView](http://docs.angularjs.org/api/ngRoute/directive/ngView). When Angular bootstraps your application the HTML compiler traverses the DOM, matching directives against the DOM Elements.
 
 
 Their are four types of directives
@@ -16,7 +29,7 @@ Their are four types of directives
 
 
 ####Creating a simple HelloWorld Directive
-To create a directive we use need to use the modules `.directive()` method
+To create a directive we use need to use the module `.directive()` method. So lets create a basic directive:
 
 ```js
     var app = angular.module('app'); //gets the app
@@ -30,13 +43,13 @@ To create a directive we use need to use the modules `.directive()` method
     });
 ```
 
-Then to see the result I can place any element with the `hello-world` attribute into my HTML e.g.
+Then to see the result I can place any element with the ` hello-world ` attribute into my HTML e.g.
 ```html
 <div hello-world>Some Random Text that will be replaced by our directive</div>
 ```
 **Note:** for the directive name we use *camelCase* in our script files and in html it is *all-lower-case-with-dashes-between-words*. In our example `helloWorld` in Javascript and `hello-world` in the HTML element
 
-####[PLACEHOLDER: Explaine and demo replace: false]
+####[PLACEHOLDER: Explain and demo replace: false]
 
 #####Multiple 'restrict' types
 We are not limited to a single type as we show in our next example
@@ -63,7 +76,7 @@ Ok now we can easliy build massive large directives that do loads of complex thi
 
 There are a few ways we can make things a little more dynamic but lets give it some context....
 
-######Directive Scopes and link function
+######Directive Scopes and the link function
 The template of a directive isn't much use if it’s not compiled against the right scope. By default a directive does not get a new child scope, but instead gets it's parent's scope. For example if we used our directive inside an element that has a controller, by default the direcitve uses the controllers scope.
 
 Back to our case, generic is boring so rather then Just have a generic Hello, lets get it to accept a name to say hello to a user. This is where we introduce the link function and give the directive a Scope to work with. So lets create a new directive:
@@ -247,7 +260,7 @@ app.directive('simplyIsolated', function () {
             ,expressnum: '&sq'
         }
         ,link: function (scope, elem, attr){
-           //wraps the funtion in an anymous function to allow 
+           //wraps the funtion in an anymous function to allow
            //to be called in an expression in our template
            scope.expressnum = scope.expressnum();
 
@@ -289,14 +302,13 @@ Enter `12` into our inputs and now our directive template shows the results:
  * the `=` results in `24` because `12` is a number and it is not converted/ treated as a string
  * the `&` results in `144` because it calls the function square from it's isolated scope which is assigned from the expressnum attribute which is bound to the attribute `sq` which is assigned the function `sqr`
 
- ...Wow that last one is a little bit of a mouthfull 
 
 
-####[Todo]
+####[Todo: part 2 - ]
 (info in this [ditective tutorial][http://www.sitepoint.com/practical-guide-angularjs-directives-part-two/] )
  * Transclusion
- 
- * Controller 
+
+ * Controller
     * [Controller Vs Link function][ http://stackoverflow.com/questions/12546945/difference-between-the-controller-link-and-compile-functions-when-definin]
  * require
 
