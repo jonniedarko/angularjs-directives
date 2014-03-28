@@ -305,11 +305,11 @@ Enter `12` into our inputs and now our directive template shows the results:
 
 
 ####[Todo: part 2 - ]
-(info in this [ditective tutorial][http://www.sitepoint.com/practical-guide-angularjs-directives-part-two/] )
+info in this [ditective tutorial](http://www.sitepoint.com/practical-guide-angularjs-directives-part-two/) 
  * Transclusion
 
  * Controller
-    * [Controller Vs Link function][ http://stackoverflow.com/questions/12546945/difference-between-the-controller-link-and-compile-functions-when-definin]
+    * [Controller Vs Link function]( http://stackoverflow.com/questions/12546945/difference-between-the-controller-link-and-compile-functions-when-definin)
  * require
 
 
