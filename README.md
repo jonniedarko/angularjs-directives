@@ -311,6 +311,7 @@ info in this [ditective tutorial](http://www.sitepoint.com/practical-guide-angul
  * Controller
     * [Controller Vs Link function]( http://stackoverflow.com/questions/12546945/difference-between-the-controller-link-and-compile-functions-when-definin)
  * require
+ * Good Directive use [example](http://stackoverflow.com/questions/14833326/how-to-set-focus-in-angularjs)
 
 
 
